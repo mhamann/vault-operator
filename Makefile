@@ -359,6 +359,12 @@ bin/.push-$(DOTFILE_IMAGE)-%: bin/.container-$(DOTFILE_IMAGE)-%
 	@echo "pushed: $(IMAGE):$(TAG_$*)"
 	@echo
 
+pushlocal: bin/.kind-$(DOTFILE_IMAGE)-PROD bin/.kind-$(DOTFILE_IMAGE)-DBG
+bin/.kind-$(DOTFILE_IMAGE)-%: bin/.container-$(DOTFILE_IMAGE)-%
+	@kind load docker-image $(IMAGE):$(TAG_$*)
+	@echo "loaded into kind: $(IMAGE):$(TAG_$*)"
+	@echo
+
 .PHONY: docker-manifest
 docker-manifest: docker-manifest-PROD docker-manifest-DBG
 docker-manifest-%:
