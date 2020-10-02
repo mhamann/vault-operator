@@ -45,3 +45,4 @@ jobs:
       - name: Run checks
         run: |
           make ci
+        working-directory: ./operator
